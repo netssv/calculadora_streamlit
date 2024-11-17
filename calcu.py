@@ -104,33 +104,33 @@ tab1, tab2, tab3, tab4 = st.tabs([
 with tab1:
     st.header("📊 Calcula tu salario líquido")
     
-    # Usar form para permitir submit con Enter
-    with st.form(key='calculadora_form'):
-        salario_input = st.text_input(
+    # form para solucionar submit con Enter
+    with st.form(key='calculadora_form'): #formulario para ingresar el salario
+        salario_input = st.text_input( #campo de texto para ingresar el salario
             "Ingresa tu salario mensual ($):",
-            key="salario_input",
-            placeholder="Ejemplo: 1000.00"
+            key="salario_input", #clave para guardar el valor del campo de texto
+            placeholder="Ejemplo: 1000.00" #texto de ejemplo en el campo de texto
         )
         
         col_btn1, col_btn2 = st.columns(2) # Botones en dos columnas para centrar
-        with col_btn1:
+        with col_btn1: #boton para calcular el salario
             submit_button = st.form_submit_button("💰 Calcular")
-        with col_btn2:
+        with col_btn2: #boton para borrar el formulario
             clear_button = st.form_submit_button("🗑️ Borrar", on_click=reset_form) #al hacer click manda a la variable reset form
 
-    # Lógica de cálculo
+    # Errores personalizados 
     if submit_button:
-        if not salario_input.strip():
-            st.error("⚠️ Por favor, ingresa el salario a calcular") #si no se ingresa nada en el campo de salario
+        if not salario_input.strip(): #si no se ingresa nada en el campo de salario
+            st.error("⚠️ Por favor, ingresa el salario a calcular")
         else:
             try:
-                salario = float(salario_input)
-                if salario < 0:
-                    st.error("⚠️ El salario no puede ser negativo")
+                salario = float(salario_input) #convertir el salario ingresado a un numero flotante
+                if salario < 0: #si el salario es negativo
+                    st.error("⚠️ El salario no puede ser negativo") #mostrar un mensaje de error
                 else:
-                    resultados = calcular_deducciones(salario)
+                    resultados = calcular_deducciones(salario) #calcular las deducciones del salario
                     
-                    # Mostrar el tramo
+                    # Mostrar el tramo de ISR al que pertenece el salario
                     st.info(f"📊 Tu salario está en el: **{resultados['tramo']}**")
                     
                     # Crear DataFrame con todos los resultados
@@ -206,9 +206,11 @@ with tab3:
     st.header("👨‍💻 Código")
     st.write("### Características principales:")
     st.write("- ✨ Cálculo preciso de retenciones")
-    st.write("- 📊 Visualización de resultados con gráficos")
-    st.write("- 🔒 Validación robusta de datos")
+    st.write("- 📊 Deteccion de tramos al que pertenece el salario")
+    st.write("- 🔒 Validación de datos")
     st.write("- 📱 Diseño adaptable")
+    st.write("- 📦 Fácil de usar")
+    st.write("- 💻 Descaga de la tabla en CSV")
 
 with tab4:
     st.header("📧 Contacto")

@@ -201,6 +201,7 @@ with tab2: #tab para mostrar la legislacion
         st.markdown("#### AFP")
         st.write("- Empleado: 7.25%")
         st.write("- Empleador: 7.75%")
+    st.write("⚖️ **Documento Oficial :** [Transparencia Fiscal](https://www.transparenciafiscal.gob.sv/downloads/pdf/2-1242365PTF_Tablas_de_Retencion_del_Impuesto_sobre_la_Renta_18_12_2015.pdf)")
 
 with tab3: #tab para mostrar el codigo
     st.header("👨‍💻 Código")

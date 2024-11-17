@@ -146,8 +146,8 @@ with tab1:
                             'Impuesto sobre la Renta',
                             'Salario Líquido'
                         ],
-                        'Monto': [
-                            f"${resultados['salario_base']:.2f}",
+                        'Monto': [ #mostrar los resultados en una tabla .2f es para mostrar solo dos decimales
+                            f"${resultados['salario_base']:.2f}", 
                             f"${resultados['afp_patronal']:.2f}",
                             f"${resultados['isss_patronal']:.2f}",
                             f"${resultados['isss_laboral']:.2f}",
@@ -159,21 +159,21 @@ with tab1:
                         ]
                     }
                     
-                    df = pd.DataFrame(datos)
-                    st.dataframe(df, hide_index=True)
+                    df = pd.DataFrame(datos) #crear un dataframe con los datos
+                    st.dataframe(df, hide_index=True) #mostrar el dataframe en la interfaz
                                         
                     # Mostrar costo total para el empleador
                     costo_empleador = resultados['salario_base'] + resultados['afp_patronal'] + resultados['isss_patronal']
                     st.info(f"💼 **Costo total para el empleador:** ${costo_empleador:.2f}")
                     
-            except ValueError:
+            except ValueError: #si se ingresa un valor que no es un numero
                 st.error("⚠️ Por favor, ingresa solo números y punto decimal")
 
     # Si se presiona borrar, recargar la página
-    if clear_button:
-        st.rerun()
+    if clear_button: 
+        st.rerun() #volver a correr la aplicacion
 
-with tab2:
+with tab2: #tab para mostrar la legislacion
     st.header("📜 Legislación")
     
     # Tabla completa de tramos ISR
@@ -186,23 +186,23 @@ with tab2:
         'Sobre exceso de': ['-', '$472.00', '$895.24', '$2,038.10'],
         'Cuota Fija': ['$0.00', '$17.67', '$60.00', '$288.57']
     }
-    df_tramos = pd.DataFrame(data_tramos)
+    df_tramos = pd.DataFrame(data_tramos) #crear un dataframe con los datos de los tramos de isr
     st.table(df_tramos)
     
-    st.subheader("Porcentajes de Retención")
+    st.subheader("Porcentajes de Retención") #mostrar los porcentajes de retencion del isss y afp
     
     col1, col2 = st.columns(2)
-    with col1:
-        st.markdown("#### ISSS")
+    with col1: #mostrar los porcentajes de retencion del isss
+        st.markdown("#### ISSS") 
         st.write("- Empleado: 3% (máximo $30.00)")
         st.write("- Empleador: 7.5%")
-    
-    with col2:
+     
+    with col2: #mostrar los porcentajes de retencion de la afp
         st.markdown("#### AFP")
         st.write("- Empleado: 7.25%")
         st.write("- Empleador: 7.75%")
 
-with tab3:
+with tab3: #tab para mostrar el codigo
     st.header("👨‍💻 Código")
     st.write("### Características principales:")
     st.write("- ✨ Cálculo preciso de retenciones")
@@ -212,7 +212,7 @@ with tab3:
     st.write("- 📦 Fácil de usar")
     st.write("- 💻 Descaga de la tabla en CSV")
 
-with tab4:
+with tab4: #tab para mostrar la informacion de contacto
     st.header("📧 Contacto")
     st.write("### Información de contacto")
     st.write("👨‍💻 **Autor:** Rodrigo Martel")

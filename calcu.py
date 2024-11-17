@@ -20,7 +20,6 @@
 
 import streamlit as st #importar la libreria de streamlit para la interfaz
 import pandas as pd #importar la libreria de pandas para el manejo de datos en tablas
-import plotly.graph_objects as go #importar la libreria de plotly para graficos interactivos
 
 # Configuración de página
 st.set_page_config(
@@ -90,39 +89,6 @@ def calcular_deducciones(salario): #funcion para calcular las deducciones
         'salario_liquido': salario_liquido,
         'tramo': tramo
     }
-
-def crear_grafico_deducciones(resultados):
-    """Crea un gráfico de pastel con las deducciones"""
-    labels = ['Salario Líquido', 'ISSS Laboral', 'AFP Laboral', 'ISR']
-    values = [
-        resultados['salario_liquido'],
-        resultados['isss_laboral'],
-        resultados['afp_laboral'],
-        resultados['isr']
-    ]
-    
-    fig = go.Figure(data=[go.Pie(
-        labels=labels,
-        values=values,
-        hole=.4,
-        textinfo='percent+value',  # mostrar solo porcentaje y valor
-        texttemplate='%{percent:.1%}<br>$%{value:.2f}',  # formato del texto
-        insidetextfont=dict(size=14)  # incrementar el tamaño del texto dentro del pastel
-    )])
-    
-    fig.update_layout(
-        title={ 
-            'text': "Distribución del Salario",
-            'xanchor': 'center',  # centrar el título horizontalmente
-            'yanchor': 'top',  # alinear el título en la parte superior
-            'font': {'size': 20},  # tamaño de la fuente del título
-            'x': 0.5,  # centrar el título horizontalmente
-            'y': 0.95  # ubicar el título en la parte superior de la gráfica
-        },
-        height=350  # altura del gráfico
-    )
-    
-    return fig
 
 # Interfaz principal con tabs
 st.write("## 💵 Calculadora de Retenciones Salariales 2024")
@@ -195,10 +161,7 @@ with tab1:
                     
                     df = pd.DataFrame(datos)
                     st.dataframe(df, hide_index=True)
-                    
-                    # Mostrar gráfico de deducciones
-                    st.plotly_chart(crear_grafico_deducciones(resultados), use_container_width=True)
-                    
+                                        
                     # Mostrar costo total para el empleador
                     costo_empleador = resultados['salario_base'] + resultados['afp_patronal'] + resultados['isss_patronal']
                     st.info(f"💼 **Costo total para el empleador:** ${costo_empleador:.2f}")
